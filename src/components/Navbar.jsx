@@ -1,25 +1,19 @@
-import { Link, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
-const Nav = () => {
+const Navbar = () => {
     return (
-        <div className="flex p-5 justify-center gap-10">
+        <div className="flex items-center justify-center gap-x-10 text-sm mb-10">
             <NavLink
-                to="/"
                 className={(e) => (e.isActive ? "text-red-300" : "")}
+                to="/"
             >
                 Home
             </NavLink>
             <NavLink
                 className={(e) => (e.isActive ? "text-red-300" : "")}
-                to="/services"
+                to="/recipes"
             >
-                Services
-            </NavLink>
-            <NavLink
-                className={(e) => (e.isActive ? "text-red-300" : "")}
-                to="/products"
-            >
-                Products
+                Recipes
             </NavLink>
             <NavLink
                 className={(e) => (e.isActive ? "text-red-300" : "")}
@@ -27,8 +21,14 @@ const Nav = () => {
             >
                 About
             </NavLink>
+            <NavLink
+                className={(e) => (e.isActive ? "text-red-300" : "")}
+                to="/create-recipe"
+            >
+                Create Recipe
+            </NavLink>
         </div>
     );
 };
 
-export default Nav;
+export default Navbar;
