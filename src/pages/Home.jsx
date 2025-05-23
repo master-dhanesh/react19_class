@@ -3,4 +3,3 @@ const Home = () => {
 };
 
 export default Home;
-// we have to add fav functionality at last

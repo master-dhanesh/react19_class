@@ -3,7 +3,7 @@ import Mainroutes from "./routes/Mainroutes";
 
 const App = () => {
     return (
-        <div className="py-10 px-[10%] w-screen h-screen text-white font-thin bg-gray-800">
+        <div className="font-thin">
             <Navbar />
             <Mainroutes />
         </div>
