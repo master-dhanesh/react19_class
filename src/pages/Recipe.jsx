@@ -6,9 +6,10 @@ import { toast } from "react-toastify";
 
 const Recipe = () => {
     const navigate = useNavigate();
-    const { data, setdata } = useContext(recipecontext);
+    const { data, setdata, favroite, setfavroite } = useContext(recipecontext);
     const { id } = useParams();
     const recipe = data.find((r) => r.id == id);
+    console.log(favroite.find((r) => r.id == recipe.id));
     const {
         register,
         handleSubmit,
@@ -32,6 +33,7 @@ const Recipe = () => {
         const copydata = [...data];
         copydata[i] = { ...recipe, ...updatedRecipe };
         setdata(copydata);
+        window.localStorage.setItem("recipes", JSON.stringify(copydata));
         toast.success("recipe updated!");
         reset();
     };
@@ -39,15 +41,33 @@ const Recipe = () => {
     const DeleteHandler = () => {
         const filterData = data.filter((r) => r.id != id);
         setdata(filterData);
+        window.localStorage.setItem("recipes", JSON.stringify(filterData));
+        // remove the recipe from favroite as well if exist
         toast.success("Recipe Deleted");
         navigate("/recipes");
+    };
+
+    const FavroiteHandler = () => {
+        let copyfavroite = [...favroite];
+        copyfavroite.push(recipe);
+        setfavroite(copyfavroite);
+        window.localStorage.setItem("favroite", JSON.stringify(copyfavroite));
+    };
+
+    const UnFavroiteHandler = () => {
+        const filteredfavroite = favroite.filter((f) => f.id != id);
+        setfavroite(filteredfavroite);
+        window.localStorage.setItem(
+            "favroite",
+            JSON.stringify(filteredfavroite)
+        );
     };
 
     return recipe ? (
         <div className="mt-5 w-full h-screen overflow-auto flex  ">
             {/*  */}
             <div className="left w-[50vw]">
-                <h1 className="text-5xl font-black">{recipe.title}</h1>
+                <h1 className="text-5xl font-black">{recipe.title} </h1>
                 <img
                     className="h-[30vh] object-cover"
                     src={recipe.image}
@@ -56,6 +76,22 @@ const Recipe = () => {
                 <small className=" font-black text-red-400">
                     {recipe.chef}
                 </small>
+
+                {favroite.find((r) => r.id == recipe.id) ? (
+                    <button
+                        onClick={UnFavroiteHandler}
+                        className="block mt-5 text-white bg-red-500 p-1 rounded"
+                    >
+                        Un-Favroite
+                    </button>
+                ) : (
+                    <button
+                        onClick={FavroiteHandler}
+                        className="block mt-5 text-white bg-blue-500 p-1 rounded"
+                    >
+                        Favroite
+                    </button>
+                )}
             </div>
             {/*  */}
             <form
