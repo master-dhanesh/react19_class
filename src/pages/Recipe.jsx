@@ -28,12 +28,10 @@ const Recipe = () => {
 
     const SubmitHandler = (updatedRecipe) => {
         const i = data.findIndex((r) => r.id == id);
-        // code to update recipe
-        console.log(data[i]);
         const copydata = [...data];
         copydata[i] = { ...recipe, ...updatedRecipe };
         setdata(copydata);
-        window.localStorage.setItem("recipes", JSON.stringify(copydata));
+        localStorage.setItem("recipes", JSON.stringify(copydata));
         toast.success("recipe updated!");
         reset();
     };
@@ -41,7 +39,7 @@ const Recipe = () => {
     const DeleteHandler = () => {
         const filterData = data.filter((r) => r.id != id);
         setdata(filterData);
-        window.localStorage.setItem("recipes", JSON.stringify(filterData));
+        localStorage.setItem("recipes", JSON.stringify(filterData));
         // remove the recipe from favroite as well if exist
         toast.success("Recipe Deleted");
         navigate("/recipes");
@@ -51,16 +49,13 @@ const Recipe = () => {
         let copyfavroite = [...favroite];
         copyfavroite.push(recipe);
         setfavroite(copyfavroite);
-        window.localStorage.setItem("favroite", JSON.stringify(copyfavroite));
+        localStorage.setItem("favroite", JSON.stringify(copyfavroite));
     };
 
     const UnFavroiteHandler = () => {
         const filteredfavroite = favroite.filter((f) => f.id != id);
         setfavroite(filteredfavroite);
-        window.localStorage.setItem(
-            "favroite",
-            JSON.stringify(filteredfavroite)
-        );
+        localStorage.setItem("favroite", JSON.stringify(filteredfavroite));
     };
 
     return recipe ? (
