@@ -1,14 +1,20 @@
 import { useForm } from "react-hook-form";
 import { nanoid } from "nanoid";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { asyncsignupuser } from "../../store/actions/userActions";
+
 const Signup = () => {
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
     const { register, handleSubmit } = useForm();
 
     const SigninHandler = (user) => {
         user.id = nanoid();
         user.isAdmin = false;
         user.cart = [];
-        console.log(user);
+        dispatch(asyncsignupuser(user));
+        navigate("/signin");
     };
     return (
         <form onSubmit={handleSubmit(SigninHandler)} className="p-5 w-full">

@@ -1,11 +1,13 @@
 import { useForm } from "react-hook-form";
-import { nanoid } from "nanoid";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { asyncsigninuser } from "../../store/actions/userActions";
 const Signin = () => {
+    const dispatch = useDispatch();
     const { register, handleSubmit } = useForm();
 
     const SigninHandler = (user) => {
-        console.log(user);
+        dispatch(asyncsigninuser(user));
     };
     return (
         <form onSubmit={handleSubmit(SigninHandler)} className="p-5 w-full">
