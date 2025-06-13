@@ -3,6 +3,7 @@ import { lazy } from "react";
 import Settings from "../pages/user/Settings";
 import Unauth from "./Unauth";
 import Auth from "./Auth";
+import CreateProduct from "../pages/admin/CreateProduct";
 const Signup = lazy(() => import("../pages/user/Signup"));
 const Signin = lazy(() => import("../pages/user/Signin"));
 const About = lazy(() => import("../pages/About"));
@@ -36,6 +37,15 @@ const Mainroutes = () => {
                 element={
                     <Auth>
                         <Settings />
+                    </Auth>
+                }
+            />
+
+            <Route
+                path="/create-product"
+                element={
+                    <Auth>
+                        <CreateProduct />
                     </Auth>
                 }
             />

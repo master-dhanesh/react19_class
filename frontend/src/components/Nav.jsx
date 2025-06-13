@@ -21,6 +21,16 @@ const Nav = () => {
                     >
                         User Settings
                     </NavLink>
+                    {user?.isAdmin && (
+                        <NavLink
+                            className={({ isActive }) =>
+                                isActive ? "text-red-400" : ""
+                            }
+                            to="/create-product"
+                        >
+                            Create Product
+                        </NavLink>
+                    )}
                 </>
             ) : (
                 <>
